@@ -1,10 +1,17 @@
+import Layout from 'antd/lib/layout';
 import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
-}
+import PetsTableContainer from './containers/PetsTableContainer';
+
+const App = () => (
+  <Layout>
+    <Layout.Header />
+    <Layout>
+      <Layout.Content>
+        <PetsTableContainer />
+      </Layout.Content>
+    </Layout>
+  </Layout>
+);
 
 export default App;

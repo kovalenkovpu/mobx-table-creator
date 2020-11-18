@@ -1,3 +1,3 @@
 # Proof of concept
 
-Approach for dynamic creating of tables with all necessary MobX store bindings
+Approach for dynamic MobX store bindings generation for table components
