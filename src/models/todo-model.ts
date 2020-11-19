@@ -1,16 +1,16 @@
-export interface ITodoModel {
-  normalizeData(denormalizedData: Response): Promise<any[]>;
+import { TableModel } from "./table-model";
+
+export interface Todo {
+  body: string;
+  id: number;
+  title: string;
+  userId: number;
 }
 
-export class TodoModel implements ITodoModel {
-  normalizeData = async (
-    denormalizedData: Response,
-  ) => {
-    const data = await denormalizedData.json();
+export interface ITodoModel {}
 
-    // @ts-ignore
-    return data.map(dataItem => ({ ...dataItem, normalized: true }));
-  }
-}
+export class TodoModel
+  extends TableModel<Todo>
+  implements ITodoModel {}
 
 export default new TodoModel();

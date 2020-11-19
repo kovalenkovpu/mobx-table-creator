@@ -1,36 +1,39 @@
-import { QueryParams } from '../services/todos';
-import { makeAutoObservable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
-export interface ITableStore {
-  service: any;
-  model: any;
+import { QueryParams } from 'src/services/todos';
+import { TableModel } from 'src/models/table-model';
 
-  data: any[];
+export interface ITableStore<DataItemType> {
+  data: DataItemType[];
   isDataLoading: boolean;
 
-  getData(params?: QueryParams): void;
+  getData(params?: QueryParams): Promise<void>;
 }
 
-export class TableStore implements ITableStore {
-  isDataLoading = false;
-  data: [];
-  service: any;
-  model: any;
+export class TableStore<DataItemType> implements ITableStore<DataItemType> {
+  private service: any;
+  private model: TableModel<DataItemType>;
 
-  constructor(service: any, model: any) {
+  data: DataItemType[];
+  isDataLoading = false;
+
+  constructor(service: any, model: TableModel<DataItemType>) {
+    makeObservable(this, {
+      isDataLoading: observable,
+      data: observable,
+      getData: action,
+    })
+
     this.service = service;
     this.model = model;
-
-    makeAutoObservable(this);
   }
 
   getData = async (params?: QueryParams) => {
-    // example of communication between stores
     this.isDataLoading = true;
 
     const denormalizedData = await this.service.getData(params);
 
-    this.data = await this.model.normalizeData(denormalizedData);
+    this.data = this.model.normalizeData(denormalizedData);
 
     this.isDataLoading = false;
   };

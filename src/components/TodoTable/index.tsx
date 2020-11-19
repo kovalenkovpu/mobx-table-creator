@@ -1,8 +1,7 @@
 import Table from 'antd/lib/table';
 import React from 'react';
 
-import { ToDoStoreTable } from 'src/stores/todo-store';
-import { RootStore } from 'src/stores/root-store';
+import { ITodoTableStore } from 'src/stores/todo-store';
 
 const columns = [
   {
@@ -23,13 +22,7 @@ const columns = [
 ];
 
 // TODO: should be an elegant way to provide proper interface
-export interface TodoTableProps {
-  data: ToDoStoreTable['data'];
-  isDataLoading: RootStore['isDataLoading'];
-  getData: ToDoStoreTable['getData'];
-}
-
-export const TodoTable: React.FC<TodoTableProps> = ({
+export const TodoTable: React.FC<ITodoTableStore> = ({
   data,
   isDataLoading,
   getData,

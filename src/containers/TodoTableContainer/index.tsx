@@ -5,12 +5,17 @@ import { useStores } from 'src/hooks/useStores';
 import { TodoTable } from 'src/components/TodoTable';
 
 const TodoTableContainer: React.FC = () => {
-  const { isDataLoading, todoStore } = useStores();
+  const { todoStore } = useStores();
+  const {
+    getData,
+    data,
+    isDataLoading,
+  } = todoStore;
 
   return (
     <TodoTable
-      getData={todoStore.getData}
-      data={todoStore.data}
+      getData={getData}
+      data={data}
       isDataLoading={isDataLoading}
     />
   );
