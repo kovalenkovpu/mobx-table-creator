@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 
 import App from './App';
 import { RootStoreProvider } from './contexts';
-import rootStore from './stores/rootStore';
+import rootStore from './stores/root-store';
 
 ReactDOM.render(
   <React.StrictMode>

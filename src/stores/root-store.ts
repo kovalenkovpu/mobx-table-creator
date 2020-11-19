@@ -1,15 +1,15 @@
 import { makeAutoObservable } from 'mobx';
-import { PetStoreTable } from './petStore';
+
+import { ToDoStoreTable } from './todo-store';
 
 export class RootStore {
   isDataLoading = false;
-
-  petStore: PetStoreTable;
+  todoStore: ToDoStoreTable;
 
   constructor() {
-    this.petStore = new PetStoreTable(this);
-
     makeAutoObservable(this);
+
+    this.todoStore = new ToDoStoreTable(this);
   }
 }
 

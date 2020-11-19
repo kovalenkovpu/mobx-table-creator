@@ -1,15 +1,16 @@
 import Layout from 'antd/lib/layout';
 import React from 'react';
 
-import PetsTableContainer from './containers/PetsTableContainer';
+import TodoTableContainer from './containers/TodoTableContainer';
 
 const App = () => (
   <Layout>
-    <Layout.Header />
     <Layout>
+      <Layout.Sider />
       <Layout.Content>
-        <PetsTableContainer />
+        <TodoTableContainer />
       </Layout.Content>
+      <Layout.Sider />
     </Layout>
   </Layout>
 );
