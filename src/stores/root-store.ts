@@ -1,10 +1,14 @@
-import { ToDoStoreTable } from './todo-store';
+import { PostsStoreTable } from './posts-store';
+
+export interface IRootStore {
+  postsStore: PostsStoreTable;
+}
 
 export class RootStore {
-  todoStore: ToDoStoreTable;
+  postsStore: PostsStoreTable;
 
   constructor() {
-    this.todoStore = new ToDoStoreTable(this);
+    this.postsStore = new PostsStoreTable(this);
   }
 }
 

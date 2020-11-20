@@ -1,20 +1,23 @@
-export interface NormalizedDataItemType {
-  [key: string]: any;
-  normalized: boolean;
+export interface BaseTableDataItem {
+  id: number;
 }
 
-export interface ITableModel<DataItemType> {
+export type NormalizedDataItemType<DataItemType extends BaseTableDataItem> = DataItemType & {
+  key: string;
+}
+
+export interface ITableModel<DataItemType extends BaseTableDataItem> {
   normalizeData(
     denormalizedData: DataItemType[],
-  ): NormalizedDataItemType[];
+  ): NormalizedDataItemType<DataItemType>[];
 }
 
-export class TableModel<DataItemType>
+export class TableModel<DataItemType extends BaseTableDataItem>
   implements ITableModel<DataItemType> {
   normalizeData = (
     denormalizedData: DataItemType[],
-  ) => denormalizedData.map(dataItem => ({
+  ): NormalizedDataItemType<DataItemType>[] => denormalizedData.map(dataItem => ({
     ...dataItem,
-    normalized: true,
+    key: String(dataItem.id),
   }));
 }

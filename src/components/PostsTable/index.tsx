@@ -1,7 +1,8 @@
-import Table from 'antd/lib/table';
 import React from 'react';
 
-import { ITodoTableStore } from 'src/stores/todo-store';
+import { IPostsTableStore } from 'src/stores/posts-store';
+import { Post } from 'src/models/posts-model';
+import { Table } from 'src/components/Table';
 
 const columns = [
   {
@@ -19,23 +20,30 @@ const columns = [
     dataIndex: 'userId',
     key: 'userId',
   },
+  {
+    title: 'Action',
+    dataIndex: 'deleteAction',
+    key: 'deleteAction',
+  },
 ];
 
 // TODO: should be an elegant way to provide proper interface
-export const TodoTable: React.FC<ITodoTableStore> = ({
+export const PostsTable: React.FC<IPostsTableStore> = ({
   data,
   isDataLoading,
   getData,
+  onDelete,
 }) => {
   React.useEffect(() => {
     getData();
   }, [getData]);
 
   return (
-    <Table
+    <Table<Post>
       columns={columns}
       dataSource={data}
       loading={isDataLoading}
+      onDelete={onDelete}
     />
   );
 };

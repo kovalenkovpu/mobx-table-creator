@@ -2,23 +2,25 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { useStores } from 'src/hooks/useStores';
-import { TodoTable } from 'src/components/TodoTable';
+import { PostsTable } from 'src/components/PostsTable';
 
-const TodoTableContainer: React.FC = () => {
-  const { todoStore } = useStores();
+const PostsTableContainer: React.FC = () => {
+  const { postsStore } = useStores();
   const {
     getData,
+    onDelete,
     data,
     isDataLoading,
-  } = todoStore;
+  } = postsStore;
 
   return (
-    <TodoTable
+    <PostsTable
       getData={getData}
+      onDelete={onDelete}
       data={data}
       isDataLoading={isDataLoading}
     />
   );
 };
 
-export default observer(TodoTableContainer);
+export default observer(PostsTableContainer);
