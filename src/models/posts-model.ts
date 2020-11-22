@@ -7,10 +7,15 @@ export interface Post {
   userId: number;
 }
 
-export interface IPostsModel {}
+export interface IPostsModel {
+  normalizePost(post: Post): Post;
+}
 
 export class PostsModel
   extends TableModel<Post>
-  implements IPostsModel {}
+  implements IPostsModel {
+  // example of entity-specific model method  
+  normalizePost = (post: Post) => post;
+}
 
 export default new PostsModel();

@@ -4,8 +4,11 @@ import AntdTable, {
   ColumnsType,
 } from 'antd/lib/table';
 import Button from 'antd/lib/button';
+import get from 'lodash/get';
 
 import { BaseTableDataItem } from 'src/models/table-model';
+
+import { getCellMapping } from './Cells/cellMapper';
 
 export interface TableProps<DataItemType> extends AntdTableProps<DataItemType> {
   onDelete?: (dataItem: DataItemType, index: number) => void;
@@ -13,7 +16,7 @@ export interface TableProps<DataItemType> extends AntdTableProps<DataItemType> {
 
 export const Table = <DataItemType extends BaseTableDataItem>(
   props: TableProps<DataItemType>
-)=> {
+) => {
   const {
     columns: antdColumns = [],
     onDelete,
@@ -35,9 +38,16 @@ export const Table = <DataItemType extends BaseTableDataItem>(
             </Button>
           ),
         };
-      }
+      } else {
+        const cellMapper = getCellMapping<DataItemType>();
+        const key = get(column, 'key', 'default');
+        const cellRenderer = get(cellMapper, key);
 
-      return column;
+        return {
+          ...column,
+          render: cellRenderer,
+        };
+      }
     }),
     [antdColumns, onDelete],
   );

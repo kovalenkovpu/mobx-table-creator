@@ -25,10 +25,22 @@ const columns = [
     dataIndex: 'deleteAction',
     key: 'deleteAction',
   },
+  {
+    title: 'Get post detailed info',
+    dataIndex: 'detailedInfo',
+    key: 'detailedInfo',
+  },
 ];
 
-// TODO: should be an elegant way to provide proper interface
-export const PostsTable: React.FC<IPostsTableStore> = ({
+interface PostsTableProps extends Pick<
+  IPostsTableStore,
+  'data'
+  | 'isDataLoading'
+  | 'getData'
+  | 'onDelete'
+  > { };
+
+export const PostsTable: React.FC<PostsTableProps> = ({
   data,
   isDataLoading,
   getData,
