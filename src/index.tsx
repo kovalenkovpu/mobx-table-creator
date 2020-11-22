@@ -6,6 +6,8 @@ import App from './App';
 import { RootStoreProvider } from './contexts';
 import rootStore from './stores/root-store';
 
+import './index.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <RootStoreProvider store={rootStore}>

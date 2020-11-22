@@ -1,15 +1,14 @@
-import { makeAutoObservable } from 'mobx';
+import { PostsStoreTable } from './posts-store';
 
-import { ToDoStoreTable } from './todo-store';
+export interface IRootStore {
+  postsStore: PostsStoreTable;
+}
 
 export class RootStore {
-  isDataLoading = false;
-  todoStore: ToDoStoreTable;
+  postsStore: PostsStoreTable;
 
   constructor() {
-    makeAutoObservable(this);
-
-    this.todoStore = new ToDoStoreTable(this);
+    this.postsStore = new PostsStoreTable(this);
   }
 }
 
